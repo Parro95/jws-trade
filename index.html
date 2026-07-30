@@ -216,6 +216,8 @@ html[data-theme="light"] .top a.cta-mini{color:#fff}
 .cover.down::before{background:var(--down)}
 .cover span{font-family:var(--disp);font-size:17px;line-height:1.2;text-transform:uppercase;color:var(--text);text-align:center;max-width:88%}
 .cover em{position:absolute;right:12px;bottom:8px;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.15em;color:var(--muted)}
+.cover .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px;z-index:1}
+.cover.has-img span,.cover.has-img em{display:none}
 .badge{position:absolute;top:10px;right:-6px;transform:rotate(2deg);
   font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;
   color:#231602;background:linear-gradient(135deg,#FFC554,#FFA51F);
@@ -609,22 +611,22 @@ VIDEOS.forEach(v => {
 /* ============ Books: Amazon best sellers (tag auto-appended) ============ */
 const AFFILIATE_TAG = "journeywith04-22"; // Amazon AU tag
 const BOOKS = [
-  { k:"PSYCHOLOGY", t:"Trading in the Zone", badge:"ALL-TIME CLASSIC", r:"4.7", a:"Mark Douglas",
+  { k:"PSYCHOLOGY", t:"Trading in the Zone", img:"assets/book-zone.jpg", badge:"ALL-TIME CLASSIC", r:"4.7", a:"Mark Douglas",
     d:"The classic on trading psychology — why discipline beats prediction.",
     url:"https://link.amazon/B0frVzefy", searchUrl:"https://www.amazon.com.au/s?k=trading+in+the+zone+mark+douglas" },
-  { k:"BEGINNER BEST SELLER", t:"How to Day Trade for a Living", badge:"TOP SELLER", r:"4.6", a:"Andrew Aziz",
+  { k:"BEGINNER BEST SELLER", t:"How to Day Trade for a Living", img:"assets/book-daytrade.jpg", badge:"TOP SELLER", r:"4.6", a:"Andrew Aziz",
     d:"Amazon's long-running #1 beginner trading book: tools, tactics, money management.",
     url:"https://link.amazon/B00Vd0Dsk", searchUrl:"https://www.amazon.com.au/s?k=how+to+day+trade+for+a+living+andrew+aziz" },
-  { k:"MINDSET", t:"Best Loser Wins", badge:"BEST SELLER", r:"4.7", a:"Tom Hougaard",
+  { k:"MINDSET", t:"Best Loser Wins", img:"assets/book-bestloser.jpg", badge:"BEST SELLER", r:"4.7", a:"Tom Hougaard",
     d:"A high-stakes trader on why handling losses well is the real edge.",
     url:"https://link.amazon/B024b51aZ", searchUrl:"https://www.amazon.com.au/s?k=best+loser+wins+tom+hougaard" },
-  { k:"TECHNICAL ANALYSIS", t:"Technical Analysis of the Financial Markets", badge:"THE BIBLE", r:"4.7", a:"John J. Murphy",
+  { k:"TECHNICAL ANALYSIS", t:"Technical Analysis of the Financial Markets", img:"assets/book-ta.jpg", badge:"THE BIBLE", r:"4.7", a:"John J. Murphy",
     d:"The reference bible for charts, trends and indicators.",
     url:"https://link.amazon/B0awNruH8", searchUrl:"https://www.amazon.com.au/s?k=technical+analysis+of+the+financial+markets+murphy" },
-  { k:"PATTERNS", t:"Japanese Candlestick Charting Techniques", badge:"BEST SELLER", r:"4.6", a:"Steve Nison",
+  { k:"PATTERNS", t:"Japanese Candlestick Charting Techniques", img:"assets/book-candlestick.jpg", badge:"BEST SELLER", r:"4.6", a:"Steve Nison",
     d:"The book that brought candlesticks to the West — pairs with the patterns course above.",
     url:"https://link.amazon/B09dNW1dw", searchUrl:"https://www.amazon.com.au/s?k=japanese+candlestick+charting+techniques+nison" },
-  { k:"THE GREATS", t:"Market Wizards", badge:"BEST SELLER", r:"4.6", a:"Jack D. Schwager",
+  { k:"THE GREATS", t:"Market Wizards", img:"assets/book-wizards.jpg", badge:"BEST SELLER", r:"4.6", a:"Jack D. Schwager",
     d:"Interviews with the world's top traders — how the best actually think.",
     url:"https://link.amazon/B034hwFXs", searchUrl:"https://www.amazon.com.au/s?k=market+wizards+jack+schwager" },
 ];
@@ -641,6 +643,14 @@ BOOKS.forEach((b, i) => {
     <span class="au">${b.a}</span>
     <span class="stars">\u2605 ${b.r} <em>on Amazon</em></span>
     <p>${b.d}</p><span class="go">View on Amazon \u2192</span>`;
+  if (b.img) {
+    const ph = document.createElement("img");
+    ph.className = "photo"; ph.alt = b.t; ph.loading = "lazy";
+    ph.onload = () => a.querySelector(".cover").classList.add("has-img");
+    ph.onerror = () => ph.remove();
+    ph.src = b.img;
+    a.querySelector(".cover").appendChild(ph);
+  }
   bg.appendChild(a);
 });
 
