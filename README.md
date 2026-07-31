@@ -1,98 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEXC vs OKX (2026): Which Exchange Should Beginners Pick?</title>
-<meta name="description" content="MEXC vs OKX compared for beginners in 2026: coins, futures, demo trading, app experience and new-user rewards — plus referral codes for both. Honest comparison, no paid course.">
-<link rel="canonical" href="https://trade.journeywithshannon.com/mexc-vs-okx.html">
-<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Parro95/jws-assets/logo.png">
-<meta property="og:site_name" content="JWS Trading">
-<meta property="og:type" content="article">
-<meta property="og:title" content="MEXC vs OKX (2026): Which Exchange Should Beginners Pick?">
-<meta property="og:description" content="MEXC vs OKX compared for beginners in 2026: coins, futures, demo trading, app experience and new-user rewards — plus referral codes for both. Honest comparison, no paid course.">
-<meta property="og:url" content="https://trade.journeywithshannon.com/mexc-vs-okx.html">
-<meta property="og:image" content="https://trade.journeywithshannon.com/assets/share-card.png">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#0B0E11;--panel:#11161C;--card:#141A21;--line:#1F2830;--up:#2EBD85;--up-soft:#43D69B;--down:#F6465D;--down-soft:#FF6B7E;--text:#EAF0F4;--muted:#8FA0AC;--faint:#5E6E79;--disp:'Archivo Black',sans-serif;--body:'Archivo',sans-serif;--mono:'JetBrains Mono',monospace}
-@media(prefers-color-scheme:light){:root{--bg:#F6F8FA;--panel:#FFF;--card:#FFF;--line:#DFE7ED;--up:#149E6E;--up-soft:#0F8A5F;--down:#DB2D44;--down-soft:#C2273C;--text:#10181F;--muted:#54646F;--faint:#77868F}}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased}
-.wrap{max-width:760px;margin:0 auto;padding:0 22px}
-.top{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;max-width:1080px}
-.brand{font-family:var(--disp);font-size:15px;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:9px}
-.brand img{width:28px;height:28px;object-fit:contain}
-.brand span{color:var(--up)}
-.back{font-family:var(--mono);font-size:11px;font-weight:600;white-space:nowrap;color:#04140D;background:var(--up);text-decoration:none;padding:9px 14px;border-radius:999px}
-@media(prefers-color-scheme:light){.back{color:#fff}}
-article{padding:56px 0 40px}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.28em;color:var(--up);text-transform:uppercase}
-h1{font-family:var(--disp);font-size:clamp(30px,6vw,46px);line-height:1.06;text-transform:uppercase;margin:12px 0 16px}
-h2{font-family:var(--disp);font-size:22px;text-transform:uppercase;margin:38px 0 12px}
-p{color:var(--muted);margin-bottom:14px;font-size:15px}
-strong{color:var(--text)}
-ol,ul{color:var(--muted);margin:0 0 14px 22px;font-size:15px}
-li{margin-bottom:8px}
-a{color:var(--up)}
-.codebox{display:flex;flex-wrap:wrap;align-items:center;gap:14px;background:linear-gradient(180deg,var(--card),var(--panel));border:1px solid var(--up);border-radius:18px;padding:22px;margin:22px 0}
-.codebox .c{font-family:var(--mono);font-size:20px;font-weight:700;letter-spacing:.08em;color:var(--up)}
-.codebox a{margin-left:auto;font-weight:600;font-size:14px;text-decoration:none;padding:13px 22px;border-radius:12px;background:var(--up);color:#04140D}
-@media(prefers-color-scheme:light){.codebox a{color:#fff}}
-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
-th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}
-th{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase}
-td:first-child{color:var(--muted)}
-td b{color:var(--text)}
-.tick{color:var(--up);font-weight:700}
-.cta2{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0}
-.cta2 a{flex:1 1 200px;text-align:center;font-weight:600;font-size:15px;text-decoration:none;padding:15px;border-radius:12px}
-.cta2 .g{background:var(--up);color:#04140D}.cta2 .r{background:var(--down);color:#fff}
-@media(prefers-color-scheme:light){.cta2 .g{color:#fff}}
-footer{border-top:1px solid var(--line);padding:34px 0 50px;font-size:12px;color:var(--faint)}
-footer p{font-size:12px;color:var(--faint)}
-footer nav{margin-bottom:14px;display:flex;flex-wrap:wrap;gap:16px}
-footer nav a{color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:11px}
-</style>
+# JWS Trading — trade.journeywithshannon.com
 
-</head>
-<body>
-<nav class="top"><div class="wrap">
-  <a class="brand" href="/"><img src="https://cdn.jsdelivr.net/gh/Parro95/jws-assets/logo.png" onerror="this.style.display='none'" alt="">JWS<span>&nbsp;TRADING</span></a>
-  <a class="back" href="/">Learn to trade free →</a>
-</div></nav>
-<article><div class="wrap">
+Free crypto trading education page. Static site — no build step.
 
-<span class="eyebrow">Updated July 2026 · Honest comparison</span>
-<h1>MEXC vs OKX</h1>
-<p>Both are major global crypto exchanges, both are free to join, and both offer demo trading — so for most beginners this choice is closer than the internet makes it sound. Here's the honest side-by-side, from someone who uses both.</p>
-<h2>At a glance</h2>
-<table>
-<tr><th></th><th>MEXC</th><th>OKX</th></tr>
-<tr><td>Listed coins</td><td><b>3,000+</b> — huge selection, lists new tokens fast</td><td><b>350+</b> — curated, majors and established alts</td></tr>
-<tr><td>Spot trading</td><td><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
-<tr><td>Futures</td><td><span class="tick">✓</span></td><td><span class="tick">✓</span> (availability varies by region)</td></tr>
-<tr><td>Demo / paper trading</td><td><span class="tick">✓</span> free</td><td><span class="tick">✓</span> free</td></tr>
-<tr><td>App experience</td><td>Functional, power-user leaning</td><td><b>Very polished</b> — arguably the nicest app in crypto</td></tr>
-<tr><td>Copy trading</td><td>Available</td><td>Available, well developed</td></tr>
-<tr><td>New-user rewards</td><td>Via referral code</td><td>Up to A$250 via referral link</td></tr>
-</table>
-<h2>Pick MEXC if…</h2>
-<p>You want maximum coin selection — new and small-cap tokens tend to hit MEXC early — and you like having spot, futures and a free demo in one place. It's the exchange this whole project started on.</p>
-<h2>Pick OKX if…</h2>
-<p>You value a beautifully polished app and a more curated coin list. If you're the type who'd rather have 350 quality pairs in a slick interface than 3,000 in a busy one, OKX will feel like home. The current new-user offer (up to A$250 in rewards) is also the more generous headline deal.</p>
-<h2>Or honestly — try both</h2>
-<p>Accounts are free and demo modes cost nothing, so the genuinely smart move is opening both, practising on each demo for a week, and keeping whichever feels right. These codes unlock the new-user rewards on each:</p>
-<div class="cta2">
-<a class="g" href="https://www.mexc.com/acquisition/custom-sign-up?shareCode=mexc-JWS" target="_blank" rel="noopener">Join MEXC — code mexc-JWS</a>
-<a class="r" href="https://app.okx.com/en-au/join/46797266" target="_blank" rel="noopener">Join OKX — code 46797266</a>
-</div>
-<p>Whichever you choose, do the learning first: <a href="/">our free page</a> has the most-watched beginner courses, a 6-week roadmap, and the risk talk nobody else gives you. And remember demo before deposit — always.</p>
-</div></article>
-<footer><div class="wrap">
-  <nav><a href="/">Home</a><a href="/mexc-referral-code.html">MEXC referral code</a><a href="/mexc-vs-okx.html">MEXC vs OKX</a></nav>
-  <p>General information and education only — not financial advice; it doesn't take your circumstances into account. Cryptocurrency is high-risk: prices are extremely volatile and you can lose everything you put in, and crypto products may not carry the consumer protections of regulated financial products in your country. Sign-up links on this page use my referral codes — I may earn a commission or rewards, at no extra cost to you. All trademarks belong to their owners.</p>
-  <p>© Journey With Shannon · <a href="https://linktr.ee/journeywithshannon">linktr.ee/journeywithshannon</a></p>
-</div></footer>
-</body></html>
+## Files
+- `index.html` — the whole site
+- `assets/` — emblem, favicon, Shannon photo, social share card
+
+## GitHub → Netlify auto-deploy (one-time setup)
+1. Create the repo: github.com → New repository → name it **jws-trade** (public or private).
+2. Upload everything in this bundle: **index.html, README.md, robots.txt, sitemap.xml, and the assets folder** (drag them all in together so the folder structure is kept) → Commit.
+3. Link the EXISTING Netlify site to it (don't create a new site — this keeps your domain + SSL):
+   Netlify → **jws-trade** project → **Site configuration → Build & deploy → Continuous deployment → Link repository** → GitHub → pick **jws-trade** → leave build command empty, publish directory `.` → Save.
+4. Netlify deploys immediately from the repo. From now on, **every commit auto-deploys** — no more zip dragging.
+
+## Editing after that
+Change a referral code, book, or video by editing `index.html` on GitHub (pencil icon) → Commit → live in ~30 seconds.
+The referral codes + video/book lists live in the CONFIG block near the bottom of `index.html`.
+
+## Logo
+The header logo + favicon load from the shared repo: `cdn.jsdelivr.net/gh/Parro95/jws-assets/logo.png` (fallback to bundled `assets/emblem.png`).
