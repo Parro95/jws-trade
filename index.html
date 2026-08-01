@@ -251,6 +251,26 @@ html[data-theme="light"] .top a.cta-mini{color:#fff}
 .rstep h3 em{font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;margin-right:8px}
 .rstep p{font-size:13px;color:var(--muted)}
 
+/* ---------- starter pack (email capture) ---------- */
+#pack{border-top:1px solid var(--line)}
+.pack-card{margin-top:26px;border:1px solid var(--up);border-radius:20px;padding:28px 24px;background:linear-gradient(180deg,var(--card),var(--panel));max-width:720px}
+.pack-list{list-style:none;margin:14px 0 20px;padding:0}
+.pack-list li{font-size:14px;color:var(--muted);margin-bottom:8px}
+.pack-list li b{color:var(--text)}
+.pack-list li::before{content:"\2193 ";color:var(--up);font-weight:700}
+.pack-form{display:flex;flex-wrap:wrap;gap:10px}
+.pack-form input{flex:1 1 220px;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px}
+.pack-form input:focus{outline:2px solid var(--up);border-color:var(--up)}
+.pack-form button{flex:0 0 auto;padding:14px 24px;border-radius:12px;border:0;cursor:pointer;background:var(--up);color:#04140D;font-family:var(--body);font-weight:600;font-size:15px}
+html[data-theme="light"] .pack-form button{color:#fff}
+.pack-form button:disabled{opacity:.6;cursor:wait}
+.pack-note{font-size:11.5px;color:var(--faint);margin-top:12px}
+.pack-done{display:none}
+.pack-done h3{font-size:17px;color:var(--text);margin-bottom:10px}
+.pack-dl{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.pack-dl a{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:14px;text-decoration:none;color:var(--up)}
+.pack-err{display:none;font-size:12.5px;color:var(--down);margin-top:10px}
+
 /* ---------- faq ---------- */
 #faq{border-top:1px solid var(--line)}
 .faq-list{margin-top:26px;max-width:720px}
@@ -424,6 +444,36 @@ footer a{color:var(--muted)}
   </div>
 </section>
 
+<!-- ================= STARTER PACK ================= -->
+<section id="pack">
+  <div class="wrap">
+    <div class="eyebrow"><span class="g">Free download</span> · The starter pack</div>
+    <h2>Free Trading Starter Pack</h2>
+    <p class="sub">Three short PDF guides I put together for beginners — yours free. Drop your email and they're instantly unlocked (plus occasional trading resources from me, unsubscribe anytime).</p>
+    <div class="pack-card">
+      <ul class="pack-list">
+        <li><b>Vol 01 — Crypto Trading Basics:</b> exchanges, order types, and account security</li>
+        <li><b>Vol 02 — Charts &amp; Candlestick Patterns:</b> with drawn pattern diagrams</li>
+        <li><b>Vol 03 — Risk &amp; Psychology:</b> the 1% rule and the four account-killing emotions</li>
+      </ul>
+      <form class="pack-form" id="pack-form">
+        <input type="email" id="pack-email" placeholder="your@email.com" required autocomplete="email" inputmode="email">
+        <button type="submit" id="pack-btn">Get the free pack →</button>
+      </form>
+      <p class="pack-err" id="pack-err">Hmm, that didn't go through — check the email and try again.</p>
+      <p class="pack-note">No spam, no course pitch. Your email is stored securely with our email provider (Klaviyo) so I can send the guides and occasional updates — unsubscribe with one tap, anytime.</p>
+      <div class="pack-done" id="pack-done">
+        <h3>You're in — grab your guides: 🎉</h3>
+        <div class="pack-dl">
+          <a href="guides/JWS-Trading-01-Crypto-Basics.pdf" download>&#8595; Vol 01 — Crypto Trading Basics</a>
+          <a href="guides/JWS-Trading-02-Charts-and-Patterns.pdf" download>&#8595; Vol 02 — Charts &amp; Candlestick Patterns</a>
+          <a href="guides/JWS-Trading-03-Risk-and-Psychology.pdf" download>&#8595; Vol 03 — Risk &amp; Psychology</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= FAQ ================= -->
 <section id="faq">
   <div class="wrap">
@@ -474,6 +524,8 @@ footer a{color:var(--muted)}
     <p>Everything on this page is general information and education. It is not financial advice and doesn't take into account your objectives, financial situation or needs. Consider whether trading is appropriate for you and seek advice from a licensed financial adviser before making investment decisions.</p>
     <h4>Risk warning</h4>
     <p>Cryptocurrency is high-risk and largely unregulated. Prices are extremely volatile, leverage multiplies losses, and you can lose all money you put in. Crypto products may not be covered by the consumer protections that apply to regulated financial products in your country. Never trade with money you can't afford to lose.</p>
+    <h4>Email &amp; analytics</h4>
+    <p>If you request the free starter pack, your email address is stored with our email service provider (Klaviyo) so we can deliver the guides and send occasional updates; every email includes a one-tap unsubscribe. This site also uses Klaviyo's onsite script to measure how the page is used.</p>
     <h4>Affiliate disclosure</h4>
     <p>The exchange sign-up links on this page use my referral codes, and the book links are Amazon affiliate links — I may earn a commission or rewards when you sign up or purchase through them, at no extra cost to you. YouTube videos are embedded from their creators' channels; all credit belongs to them, and I have no affiliation with the creators. All trademarks belong to their owners.</p>
     <h4>Guides</h4>
@@ -766,7 +818,46 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
+/* ============ Starter pack → Klaviyo ============ */
+const KLAVIYO_COMPANY_ID = "YyrFeN";
+const KLAVIYO_LIST_ID = ""; // ← optional: paste your Klaviyo List ID (Audience → Lists → list → Settings) to file signups into a specific list
+(function(){
+  const form = document.getElementById("pack-form");
+  form.addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const email = document.getElementById("pack-email").value.trim();
+    const btn = document.getElementById("pack-btn");
+    const err = document.getElementById("pack-err");
+    err.style.display = "none";
+    btn.disabled = true; btn.textContent = "Unlocking…";
+    const body = { data: { type: "subscription",
+      attributes: { custom_source: "Trade Starter Pack",
+        profile: { data: { type: "profile", attributes: { email: email,
+          properties: { signup_source: "trade-starter-pack" } } } } } } };
+    if (KLAVIYO_LIST_ID) body.data.relationships = { list: { data: { type: "list", id: KLAVIYO_LIST_ID } } };
+    let ok = false;
+    try {
+      const res = await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${KLAVIYO_COMPANY_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "revision": "2024-10-15" },
+        body: JSON.stringify(body)
+      });
+      ok = res.status === 202 || res.ok;
+    } catch(e){ ok = false; }
+    if (ok) {
+      form.style.display = "none";
+      document.getElementById("pack-done").style.display = "block";
+    } else {
+      err.style.display = "block";
+      btn.disabled = false; btn.textContent = "Get the free pack →";
+    }
+  });
+})();
+
 document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+<script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=YyrFeN"></script>
+<script>
 </script>
 </body>
 </html>
