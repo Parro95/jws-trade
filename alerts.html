@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Trade Alerts — JWS Trading</title>
+<meta name="description" content="Live automated volume and setup alerts from the JWS Trade Bot, scanning MEXC futures 24/7. Free to follow on Telegram.">
+<link rel="canonical" href="https://trade.journeywithshannon.com/alerts.html">
+<link rel="icon" href="https://cdn.jsdelivr.net/gh/Parro95/jws-assets/logo.png">
+<style>
+  :root{
+    --bg:#0B0E11; --panel:#12161C; --line:#1E242D;
+    --text:#EAECEF; --muted:#848E9C;
+    --green:#2EBD85; --red:#F6465D;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px}
+  header{display:flex;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
+  header img{width:30px;height:30px;border-radius:8px}
+  header .brand{font-weight:800;letter-spacing:.06em;font-size:14px}
+  header .back{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--green);border:1px solid var(--green);padding:6px 12px;border-radius:999px}
+  .hero{padding:34px 0 10px;text-align:center}
+  .live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--green);border:1px solid var(--line);background:var(--panel);padding:7px 14px;border-radius:999px;margin-bottom:16px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  @media (prefers-reduced-motion:reduce){.dot{animation:none}}
+  h1{font-size:clamp(26px,6vw,40px);line-height:1.1;letter-spacing:-.01em}
+  h1 .g{color:var(--green)} h1 .r{color:var(--red)}
+  .sub{color:var(--muted);font-size:15px;max-width:520px;margin:14px auto 0;line-height:1.55}
+  .cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:22px 0 8px}
+  .btn{font-family:var(--mono);font-size:12px;letter-spacing:.06em;padding:12px 20px;border-radius:12px;font-weight:700}
+  .btn-tg{background:var(--green);color:#06130D}
+  .btn-mexc{border:1px solid var(--line);background:var(--panel);color:var(--text)}
+  .feedbox{margin:26px 0 10px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}
+  .feedbox .bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .feedbox iframe{width:100%;height:70vh;min-height:480px;border:0;display:block;background:var(--bg)}
+  .fallback{padding:14px;text-align:center;font-size:13px;color:var(--muted)}
+  .fallback a{color:var(--green)}
+  .how{margin:30px 0;display:grid;gap:10px}
+  .how .card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px}
+  .how .card b{display:block;font-size:14px;margin-bottom:4px}
+  .how .card span{font-size:13px;color:var(--muted);line-height:1.5}
+  .how .g b{color:var(--green)} .how .r b{color:var(--red)}
+  .risk{border:1px solid var(--red);border-radius:14px;padding:16px;margin:6px 0 30px;font-size:13px;color:var(--muted);line-height:1.55}
+  .risk b{color:var(--red)}
+  footer{border-top:1px solid var(--line);padding:22px 0 90px;color:var(--muted);font-size:11.5px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a href="https://journeywithshannon.com" style="display:flex;align-items:center;gap:10px">
+      <img src="https://cdn.jsdelivr.net/gh/Parro95/jws-assets/logo.png" alt="JWS">
+      <span class="brand">JWS TRADING</span>
+    </a>
+    <a class="back" href="/">← Learn to trade</a>
+  </header>
+
+  <section class="hero">
+    <div class="live"><span class="dot"></span>LIVE FEED</div>
+    <h1>Automated <span class="g">long</span> &amp; <span class="r">short</span> alerts</h1>
+    <p class="sub">A bot I built scans every MEXC futures pair around the clock for unusual volume, breakouts, funding squeezes and open-interest shifts — and posts what it finds here, free.</p>
+    <div class="cta-row">
+      <a class="btn btn-tg" href="https://t.me/jwsalerts" target="_blank" rel="noopener">JOIN THE TELEGRAM →</a>
+      <a class="btn btn-mexc" href="https://www.mexc.com/acquisition/custom-sign-up?shareCode=mexc-JWS" target="_blank" rel="noopener">TRADE ON MEXC · CODE MEXC-JWS</a>
+    </div>
+  </section>
+
+  <div class="feedbox">
+    <div class="bar"><span class="dot"></span> @jwsalerts — latest alerts</div>
+    <iframe src="https://t.me/s/jwsalerts" title="JWS Trade Alerts live feed" loading="lazy"></iframe>
+    <div class="fallback">Feed not loading? <a href="https://t.me/s/jwsalerts" target="_blank" rel="noopener">Open the alerts in Telegram ↗</a></div>
+  </div>
+
+  <section class="how">
+    <div class="card g"><b>🟢 LONG setups</b><span>Buy-side volume spikes, 2-hour breakouts, negative funding (shorts paying — squeeze fuel) and rising open interest. Score 2/4 = watching. 3+/4 = strong confluence.</span></div>
+    <div class="card r"><b>🔴 SHORT setups</b><span>Sell spikes and rejection wicks, breakdowns, overheated funding (longs crowded) and open interest building against price.</span></div>
+    <div class="card"><b>📐 Position plans</b><span>Each alert includes an example plan for a $1,000 stake risking 1% — entry, stop and size worked from the setup itself, never fixed leverage. It's how sizing should be done, shown transparently.</span></div>
+  </section>
+
+  <div class="risk">
+    <b>Read this before acting on any alert.</b> These are automated data alerts, not financial advice and not a recommendation to trade. Roughly half of all setups fail — that is normal. Futures with leverage can lose money faster than you expect, including more than you put in. Practise on demo first, only ever risk money you can afford to lose, and always use a stop. General information only; it doesn't consider your circumstances.
+  </div>
+
+  <footer>
+    JWS Trading is a personal education project by Shannon — sharing what I'm learning, not selling a course. Alerts are generated automatically from public market data. MEXC links use my referral code (mexc-JWS) — shown openly; signing up through them supports this free project at no cost to you. Crypto is high-risk and largely unregulated in Australia. Nothing on this page is financial product advice.
+  </footer>
+
+</div>
+</body>
+</html>
