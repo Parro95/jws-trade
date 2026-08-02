@@ -108,6 +108,10 @@ html[data-theme="light"] .top a.cta-mini{color:#fff}
   .exch.tv:hover .go2{background:#2962FF;border-color:#2962FF;color:#fff}
 }
 @media(max-width:560px){.exch{max-width:none}}
+.hero-tg{display:inline-flex;align-items:center;font-weight:600;font-size:15.5px;text-decoration:none;padding:16px 26px;border-radius:12px;background:var(--up);color:#04140D;box-shadow:0 6px 20px rgba(46,189,133,.28)}
+html[data-theme="light"] .hero-tg{color:#fff}
+.hero-feed{display:inline-flex;align-items:center;font-weight:600;font-size:15px;text-decoration:none;padding:16px 24px;border-radius:12px;border:1px solid var(--line);color:var(--text)}
+.hero-feed:hover{border-color:var(--up)}
 .risk-line{font-size:12px;color:var(--faint);margin-top:22px;max-width:560px}
 /* byline + trust (keep OUTSIDE the exchange-cards block above) */
 .byline{display:flex;align-items:center;gap:10px;margin-top:22px;max-width:560px}
@@ -181,27 +185,27 @@ html[data-theme="light"] .top a.cta-mini{color:#fff}
 .final h2 .g{color:var(--up)}.final h2 .r{color:var(--down)}
 .final .sub{margin:10px auto 30px}
 
-/* ---------- alerts ---------- */
-#alerts{border-top:1px solid var(--line)}
-.alert-card{margin-top:26px;border:1px solid var(--line);border-radius:20px;padding:28px 24px;max-width:720px;
-  background:linear-gradient(135deg,var(--up-dim),var(--panel) 60%);position:relative;overflow:hidden}
-.alert-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--up-soft),var(--up))}
-.alert-live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--up);margin-bottom:10px}
+/* ---------- feed ---------- */
+#feed{border-bottom:1px solid var(--line);padding:56px 0}
+.feed-box{margin-top:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;max-width:720px}
+.feed-item{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-bottom:1px solid var(--line)}
+.feed-item:last-child{border-bottom:0}
+.feed-item .tag2{flex-shrink:0;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.1em;padding:5px 9px;border-radius:6px;background:var(--up-dim);color:var(--up)}
+.feed-item.down .tag2{background:var(--down-dim);color:var(--down)}
+.feed-item .fi-body{flex:1;min-width:0}
+.feed-item .pair2{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--text)}
+.feed-item .msg2{font-size:13px;color:var(--muted);margin-top:2px;word-wrap:break-word}
+.feed-item .time2{flex-shrink:0;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.feed-empty{padding:22px 18px;font-size:13.5px;color:var(--muted)}
+.alert-live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--up)}
 .alert-live i{width:8px;height:8px;border-radius:50%;background:var(--up);animation:blink 1.6s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 @media (prefers-reduced-motion: reduce){.alert-live i{animation:none}}
-.alert-card h3{font-family:var(--disp);font-size:20px;text-transform:uppercase;color:var(--text);margin-bottom:8px}
-.alert-card p{font-size:14px;color:var(--muted);margin-bottom:14px}
-.alert-ticks{list-style:none;margin:0 0 18px;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px}
-.alert-ticks li{font-size:12.5px;color:var(--muted)}
-.alert-ticks li::before{content:"\2713 ";color:var(--up);font-weight:700}
 .alert-ctas{display:flex;flex-wrap:wrap;gap:12px}
 .alert-ctas a{font-weight:600;font-size:14px;text-decoration:none;padding:13px 22px;border-radius:12px}
 .alert-ctas .tg{background:var(--up);color:#04140D}
 html[data-theme="light"] .alert-ctas .tg{color:#fff}
-.alert-ctas .feed{border:1px solid var(--line);color:var(--text)}
-.alert-ctas .feed:hover{border-color:var(--up)}
-.alert-fine{font-size:11.5px;color:var(--faint);margin-top:14px;margin-bottom:0!important}
+.alert-fine{font-size:11.5px;color:var(--faint);margin-top:14px}
 
 /* ---------- books ---------- */
 #books{border-top:1px solid var(--line)}
@@ -356,23 +360,14 @@ footer a{color:var(--muted)}
 <header class="hero" id="top">
   <div class="wrap">
     <div class="eyebrow"><span class="g">Free</span> crypto trading education · <span class="r">No paid course</span></div>
-    <h1>Learn to<br><span class="g">trade.</span></h1>
-    <p class="lede">The best free trading courses on YouTube, in one place — platform walkthrough, fundamentals, and chart patterns. Pick an exchange below and learn as you go.</p>
-    <p class="open-line"><b>100% free and open.</b> No paywall, no course to buy — share this page with anyone learning to trade.</p>
-    <div class="pick-label">CHOOSE YOUR EXCHANGE</div>
+    <h1>Live trade<br><span class="g">alerts.</span></h1>
+    <p class="lede">My bot watches ~1,500 MEXC pairs around the clock and fires the moment volume suddenly spikes — streamed free to Telegram and live on this page below. Plus everything you need to learn to trade, all free.</p>
+    <p class="open-line"><b>100% free.</b> No paid signal group, no course to buy — just the data and the education.</p>
     <div class="cta-row" id="join">
-      <a class="exch up" id="cta-hero-mexc" href="#" target="_blank" rel="noopener">
-        <span class="body"><h3>MEXC</h3><span class="sub2">My main exchange — new-user rewards with my code</span><span class="pros"><b>&#10003;</b> 3,000+ coins &nbsp;<b>&#10003;</b> Spot &amp; futures &nbsp;<b>&#10003;</b> Free demo mode</span><span class="code-pill" id="mexc-hero-code"></span></span>
-        <span class="go2">&#8594;</span>
-      </a>
-      <a class="exch down" id="cta-hero-okx" href="#" target="_blank" rel="noopener">
-        <span class="body"><h3>OKX</h3><span class="sub2">Polished all-rounder — up to A$250 in new-user rewards with my code</span><span class="pros"><b>&#10003;</b> Slick app &nbsp;<b>&#10003;</b> Copy trading &nbsp;<b>&#10003;</b> Free demo mode</span><span class="code-pill" id="okx-hero-code"></span></span>
-      <a class="exch gold" id="cta-hero-bnb" href="#" target="_blank" rel="noopener">
-        <span class="body"><h3>BINANCE</h3><span class="sub2">The world's biggest — new-user rewards with my link</span><span class="pros"><b>&#10003;</b> Largest by volume &nbsp;<b>&#10003;</b> 350+ coins &nbsp;<b>&#10003;</b> Deep liquidity</span><span class="code-pill" id="bnb-hero-code"></span></span>
-        <span class="go2">&#8594;</span>
-      </a>
+      <a class="hero-tg" href="https://t.me/jwsalerts" target="_blank" rel="noopener">Join the alerts — free →</a>
+      <a class="hero-feed" href="#feed">See live feed ↓</a>
     </div>
-    <p class="win-win">Both codes are shown openly — you unlock new-user rewards, this page earns a referral. Win-win, nothing hidden.</p>
+    
     <div class="byline">
       <img src="assets/shannon.png" alt="Shannon">
       <p><b>Put together by Shannon</b> — sharing what I'm learning, not selling a course. If it helps you, use my codes below.</p>
@@ -389,6 +384,20 @@ footer a{color:var(--muted)}
     </div>
   </div>
 </header>
+
+<!-- ================= FEED ================= -->
+<section id="feed">
+  <div class="wrap">
+    <div class="eyebrow"><span class="alert-live"><i></i>BOT RUNNING 24/7</span></div>
+    <h2>Latest alerts</h2>
+    <p class="sub">Straight from the bot — volume-spike signals as they fire. Full history and instant pings on <a href="https://t.me/jwsalerts" target="_blank" rel="noopener">Telegram</a>.</p>
+    <div class="feed-box" id="feed-box"><p class="feed-empty">Loading the latest alerts…</p></div>
+    <div class="alert-ctas" style="margin-top:18px">
+      <a class="tg" href="https://t.me/jwsalerts" target="_blank" rel="noopener">Get alerts on Telegram →</a>
+    </div>
+    <p class="alert-fine">Alerts are automated market-data signals — information, not trade recommendations. Anything you do with them is your decision; learn the risk rules below first.</p>
+  </div>
+</section>
 
 <!-- ================= WHY ================= -->
 <section id="why">
@@ -430,30 +439,6 @@ footer a{color:var(--muted)}
       <button class="shelf-arrow next" id="vids-next" aria-label="Scroll videos right">&#8250;</button>
     </div>
     <div class="shelf-foot"><div class="dots" data-for="vid-grid"></div><span class="swipe-hint">SWIPE FOR MORE <b>&#8594;</b></span></div>
-  </div>
-</section>
-
-<!-- ================= ALERTS ================= -->
-<section id="alerts">
-  <div class="wrap">
-    <div class="eyebrow"><span class="g">New</span> · From my trading bot</div>
-    <h2>Free live trade alerts</h2>
-    <p class="sub">I built a bot that watches ~1,500 low-volume MEXC pairs around the clock and fires an alert the moment volume suddenly spikes — the kind of unusual activity worth a look. The alerts stream free into Telegram.</p>
-    <div class="alert-card">
-      <span class="alert-live"><i></i>BOT RUNNING 24/7</span>
-      <h3>JWS Trade Alerts</h3>
-      <p>Volume-spike and momentum alerts, generated by code — no hype, no "guru calls," no paid signal group. Just the data, the second it moves.</p>
-      <ul class="alert-ticks">
-        <li>Scans ~1,500 pairs nonstop</li>
-        <li>Free forever on Telegram</li>
-        <li>Built &amp; run by Shannon</li>
-      </ul>
-      <div class="alert-ctas">
-        <a class="tg" href="https://t.me/jwsalerts" target="_blank" rel="noopener">Join free on Telegram →</a>
-        <a class="feed" href="/alerts.html">See the live feed</a>
-      </div>
-      <p class="alert-fine">Alerts are automated market-data signals — information, not trade recommendations. Anything you do with them is your decision; always apply the risk rules above.</p>
-    </div>
   </div>
 </section>
 
@@ -652,14 +637,13 @@ const VIDEOS = [
 /* ============ Referral wiring ============ */
 const exUrl = e => e.code ? e.base + encodeURIComponent(e.code) : e.fallback;
 const mexc = EXCHANGES[0], okx = EXCHANGES[1], bnb = EXCHANGES[2], tv = EXCHANGES[3];
-[["cta-hero-mexc",mexc],["cta-final-mexc",mexc],
- ["cta-hero-okx",okx],["cta-final-okx",okx],
- ["cta-hero-bnb",bnb],["cta-final-bnb",bnb],["cta-final-tv",tv]].forEach(([id,e])=>{
+[["cta-final-mexc",mexc],["cta-final-okx",okx],
+ ["cta-final-bnb",bnb],["cta-final-tv",tv]].forEach(([id,e])=>{
   document.getElementById(id).href = exUrl(e);
 });
-if (mexc.code) ["mexc-hero-code","mexc-final-code"].forEach(i => document.getElementById(i).textContent = "CODE " + mexc.code.toUpperCase());
-if (okx.code)  ["okx-hero-code","okx-final-code"].forEach(i => document.getElementById(i).textContent = "CODE " + okx.code.toUpperCase());
-if (bnb.code)  ["bnb-hero-code","bnb-final-code"].forEach(i => document.getElementById(i).textContent = "REF " + bnb.code.toUpperCase());
+if (mexc.code) document.getElementById("mexc-final-code").textContent = "CODE " + mexc.code.toUpperCase();
+if (okx.code)  document.getElementById("okx-final-code").textContent = "CODE " + okx.code.toUpperCase();
+if (bnb.code)  document.getElementById("bnb-final-code").textContent = "REF " + bnb.code.toUpperCase();
 
 
 /* ============ Videos: one plays at a time, others revert (pause) ============ */
@@ -898,6 +882,43 @@ const KLAVIYO_LIST_ID = "SZqZXF"; // Email List (Shopify-synced master list)
       btn.disabled = false; btn.textContent = "Get the free pack →";
     }
   });
+})();
+
+/* ============ Live alerts feed ============ */
+const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main/alerts.json";
+(function(){
+  const box = document.getElementById("feed-box");
+  function rel(iso){
+    const s = (Date.now() - new Date(iso).getTime())/1000;
+    if (isNaN(s)) return "";
+    if (s < 90) return "just now";
+    if (s < 3600) return Math.round(s/60) + "m ago";
+    if (s < 86400) return Math.round(s/3600) + "h ago";
+    return Math.round(s/86400) + "d ago";
+  }
+  function esc(t){ const d=document.createElement("div"); d.textContent=t||""; return d.innerHTML; }
+  async function load(){
+    try {
+      const res = await fetch(FEED_URL + "?t=" + Date.now());
+      if (!res.ok) throw 0;
+      const data = await res.json();
+      const alerts = (data.alerts || []).slice(0, 8);
+      if (!alerts.length) throw 0;
+      box.innerHTML = alerts.map(a => {
+        const bear = /short|down|dump|bear/i.test(a.type || "");
+        return `<div class="feed-item${bear ? " down" : ""}">
+          <span class="tag2">${esc(a.type || "ALERT")}</span>
+          <span class="fi-body"><span class="pair2">${esc(a.pair || "")}</span>
+          <span class="msg2" style="display:block">${esc(a.msg || "")}</span></span>
+          <span class="time2">${rel(a.t)}</span>
+        </div>`;
+      }).join("");
+    } catch(e) {
+      box.innerHTML = '<p class="feed-empty">Feed warming up — the freshest alerts are always live on <a href="https://t.me/jwsalerts" target="_blank" rel="noopener">Telegram</a>.</p>';
+    }
+  }
+  load();
+  setInterval(load, 60000);
 })();
 
 document.getElementById("yr").textContent = new Date().getFullYear();
