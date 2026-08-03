@@ -42,14 +42,16 @@ a{color:var(--up)}
 @media(prefers-color-scheme:light){.ctas .tg{color:#fff}}
 .ctas .learn{border:1px solid var(--line);color:var(--text)}
 .feed-box{margin-top:26px;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden}
-.feed-item{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-bottom:1px solid var(--line)}
+.feed-item{display:block;padding:14px 18px;border-bottom:1px solid var(--line)}
 .feed-item:last-child{border-bottom:0}
-.tag2{flex-shrink:0;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.1em;padding:5px 9px;border-radius:6px;background:var(--up-dim);color:var(--up)}
-.feed-item.down .tag2{background:var(--down-dim);color:var(--down)}
-.fi-body{flex:1;min-width:0}
-.pair2{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--text)}
-.msg2{display:block;font-size:13px;color:var(--muted);margin-top:2px;word-wrap:break-word}
-.time2{flex-shrink:0;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.fi-top{display:flex;align-items:center;gap:9px;min-width:0}
+.feed-item .dir{flex-shrink:0;font-size:13px;line-height:1;color:var(--up)}
+.feed-item.down .dir{color:var(--down)}
+.pair2{font-family:var(--mono);font-weight:700;font-size:14.5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini{flex-shrink:0;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.12em;padding:3px 7px;border-radius:5px;background:var(--up-dim);color:var(--up)}
+.feed-item.down .mini{background:var(--down-dim);color:var(--down)}
+.time2{margin-left:auto;flex-shrink:0;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.msg2{display:block;font-size:12.5px;color:var(--muted);margin-top:5px;padding-left:22px}
 .feed-empty{padding:22px 18px;font-size:13.5px;color:var(--muted)}
 .risk{margin-top:26px;border-left:3px solid var(--down);padding-left:14px;font-size:13px;color:var(--muted)}
 .risk b{color:var(--text)}
@@ -96,12 +98,17 @@ const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main
       const alerts = (data.alerts || []).slice(0, 20);
       if (!alerts.length) throw 0;
       box.innerHTML = alerts.map(a => {
-        const bear = /short|down|dump|bear/i.test(a.type || "");
+        const t = a.type || "";
+        const bear = /short|down|dump|bear/i.test(t);
+        const chip = /strong/i.test(t) ? "STRONG" : (/daily/i.test(t) ? "DAILY" : "");
         return `<div class="feed-item${bear ? " down" : ""}">
-          <span class="tag2">${esc(a.type || "ALERT")}</span>
-          <span class="fi-body"><span class="pair2">${esc(a.pair || "")}</span>
-          <span class="msg2">${esc(a.msg || "")}</span></span>
-          <span class="time2">${rel(a.t)}</span>
+          <span class="fi-top">
+            <span class="dir">${bear ? "&#9660;" : "&#9650;"}</span>
+            <span class="pair2">${esc(a.pair || "")}</span>
+            ${chip ? `<span class="mini">${chip}</span>` : ""}
+            <span class="time2">${rel(a.t)}</span>
+          </span>
+          <span class="msg2">${esc(a.msg || "")}</span>
         </div>`;
       }).join("");
     } catch(e) {

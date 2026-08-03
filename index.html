@@ -215,42 +215,31 @@ html[data-theme="light"] .hero-tg{color:#fff}
 .stats{display:flex;flex-wrap:wrap;gap:10px 34px;margin-top:24px}
 .stat b{font-family:var(--disp);font-size:22px;color:var(--text);display:block;line-height:1}
 .stat span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--faint);text-transform:uppercase}
-/* feed items pop in; newest pulses */
-.feed-item{animation:rise .5s ease both}
-.feed-item:nth-child(1){animation-delay:.02s}.feed-item:nth-child(2){animation-delay:.08s}
-.feed-item:nth-child(3){animation-delay:.14s}.feed-item:nth-child(4){animation-delay:.2s}
-.feed-item.newest .tag2{animation:tagPulse 2.2s ease-in-out infinite}
-@keyframes tagPulse{0%,100%{box-shadow:0 0 0 0 rgba(46,189,133,.0)}50%{box-shadow:0 0 14px 2px rgba(46,189,133,.45)}}
-.feed-item.down.newest .tag2{animation-name:tagPulseR}
-@keyframes tagPulseR{0%,100%{box-shadow:0 0 0 0 rgba(246,70,93,.0)}50%{box-shadow:0 0 14px 2px rgba(246,70,93,.45)}}
 @media (prefers-reduced-motion: reduce){
-  .rise,.feed-item{animation:none;opacity:1;transform:none}
+  .rise{animation:none;opacity:1;transform:none}
   .rv{opacity:1;transform:none;transition:none}
   .tape-track{animation:none}
-  .feed-item.newest .tag2{animation:none}
 }
 
 /* ---------- feed ---------- */
 #feed{border-bottom:1px solid var(--line);padding:56px 0}
 .feed-box{margin-top:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;max-width:720px}
-.feed-item{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-bottom:1px solid var(--line)}
+.feed-item{display:block;padding:14px 18px;border-bottom:1px solid var(--line);animation:rise .5s ease both}
+.feed-item:nth-child(1){animation-delay:.02s}.feed-item:nth-child(2){animation-delay:.08s}
+.feed-item:nth-child(3){animation-delay:.14s}.feed-item:nth-child(4){animation-delay:.2s}
 .feed-item:last-child{border-bottom:0}
-.feed-item .tag2{flex-shrink:0;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.1em;padding:5px 9px;border-radius:6px;background:var(--up-dim);color:var(--up)}
-.feed-item.down .tag2{background:var(--down-dim);color:var(--down)}
-.feed-item .fi-body{flex:1;min-width:0}
-.feed-item .pair2{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--text)}
-.feed-item .msg2{font-size:13px;color:var(--muted);margin-top:2px;word-wrap:break-word}
-.feed-item .time2{flex-shrink:0;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.feed-item.newest{background:linear-gradient(90deg,color-mix(in srgb,var(--up) 7%,transparent),transparent 70%)}
+.feed-item.down.newest{background:linear-gradient(90deg,color-mix(in srgb,var(--down) 7%,transparent),transparent 70%)}
+.fi-top{display:flex;align-items:center;gap:9px;min-width:0}
+.feed-item .dir{flex-shrink:0;font-size:13px;line-height:1;color:var(--up)}
+.feed-item.down .dir{color:var(--down)}
+.feed-item .pair2{font-family:var(--mono);font-weight:700;font-size:14.5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feed-item .mini{flex-shrink:0;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.12em;padding:3px 7px;border-radius:5px;background:var(--up-dim);color:var(--up)}
+.feed-item.down .mini{background:var(--down-dim);color:var(--down)}
+.feed-item .time2{margin-left:auto;flex-shrink:0;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.feed-item .msg2{display:block;font-size:12.5px;color:var(--muted);margin-top:5px;padding-left:22px}
 .feed-empty{padding:22px 18px;font-size:13.5px;color:var(--muted)}
-.alert-live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--up)}
-.alert-live i{width:8px;height:8px;border-radius:50%;background:var(--up);animation:blink 1.6s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-@media (prefers-reduced-motion: reduce){.alert-live i{animation:none}}
-.alert-ctas{display:flex;flex-wrap:wrap;gap:12px}
-.alert-ctas a{font-weight:600;font-size:14px;text-decoration:none;padding:13px 22px;border-radius:12px}
-.alert-ctas .tg{background:var(--up);color:#04140D}
-html[data-theme="light"] .alert-ctas .tg{color:#fff}
-.alert-fine{font-size:11.5px;color:var(--faint);margin-top:14px}
+@media (prefers-reduced-motion: reduce){.feed-item{animation:none}}
 
 /* ---------- books ---------- */
 #books{border-top:1px solid var(--line)}
@@ -378,7 +367,7 @@ html[data-theme="light"] .dock{box-shadow:0 2px 6px rgba(16,24,31,.08), 0 14px 3
 .dock-item.dock-gold{color:#E8A33C}
 .dock-fab{position:relative;top:-18px;width:54px;height:54px;flex:0 0 54px;margin:0 6px;border-radius:50%;border:0;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,var(--up),var(--down));
+  background:linear-gradient(135deg,#2EBD85,#F6465D);
   box-shadow:0 8px 22px rgba(0,0,0,.45), 0 0 0 5px var(--bg), inset 0 1px 0 rgba(255,255,255,.25);
   transition:transform .15s}
 .dock-fab:hover{transform:scale(1.06)}
@@ -1009,12 +998,17 @@ const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main
       if (!alerts.length) throw 0;
       fillTape(alerts);
       box.innerHTML = alerts.map((a, i) => {
-        const bear = /short|down|dump|bear/i.test(a.type || "");
+        const t = a.type || "";
+        const bear = /short|down|dump|bear/i.test(t);
+        const chip = /strong/i.test(t) ? "STRONG" : (/daily/i.test(t) ? "DAILY" : "");
         return `<div class="feed-item${bear ? " down" : ""}${i === 0 ? " newest" : ""}">
-          <span class="tag2">${esc(a.type || "ALERT")}</span>
-          <span class="fi-body"><span class="pair2">${esc(a.pair || "")}</span>
-          <span class="msg2" style="display:block">${esc(a.msg || "")}</span></span>
-          <span class="time2">${rel(a.t)}</span>
+          <span class="fi-top">
+            <span class="dir">${bear ? "&#9660;" : "&#9650;"}</span>
+            <span class="pair2">${esc(a.pair || "")}</span>
+            ${chip ? `<span class="mini">${chip}</span>` : ""}
+            <span class="time2">${rel(a.t)}</span>
+          </span>
+          <span class="msg2">${esc(a.msg || "")}</span>
         </div>`;
       }).join("");
     } catch(e) {
