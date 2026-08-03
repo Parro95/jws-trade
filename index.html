@@ -185,6 +185,49 @@ html[data-theme="light"] .hero-tg{color:#fff}
 .final h2 .g{color:var(--up)}.final h2 .r{color:var(--down)}
 .final .sub{margin:10px auto 30px}
 
+/* ---------- visual pop ---------- */
+/* hero ambient glow */
+.hero{position:relative}
+.hero::before{content:"";position:absolute;top:-120px;left:-10%;width:55%;height:420px;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(46,189,133,.16),transparent 70%)}
+.hero::after{content:"";position:absolute;top:-60px;right:-15%;width:50%;height:380px;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(246,70,93,.10),transparent 70%)}
+.hero .wrap{position:relative;z-index:1}
+/* staggered hero entrance */
+.rise{opacity:0;transform:translateY(16px);animation:rise .7s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.rise.d1{animation-delay:.05s}.rise.d2{animation-delay:.15s}.rise.d3{animation-delay:.25s}
+.rise.d4{animation-delay:.35s}.rise.d5{animation-delay:.45s}
+/* alert ticker tape */
+.tape{border-bottom:1px solid var(--line);background:var(--panel);overflow:hidden;white-space:nowrap}
+.tape-track{display:inline-flex;gap:0;padding:9px 0;animation:tape 30s linear infinite;will-change:transform}
+.tape:hover .tape-track{animation-play-state:paused}
+@keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tape span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);padding:0 22px}
+.tape b{font-weight:700}
+.tape .tu{color:var(--up)}.tape .td{color:var(--down)}
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+/* hero stat strip with count-up */
+.stats{display:flex;flex-wrap:wrap;gap:10px 34px;margin-top:24px}
+.stat b{font-family:var(--disp);font-size:22px;color:var(--text);display:block;line-height:1}
+.stat span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--faint);text-transform:uppercase}
+/* feed items pop in; newest pulses */
+.feed-item{animation:rise .5s ease both}
+.feed-item:nth-child(1){animation-delay:.02s}.feed-item:nth-child(2){animation-delay:.08s}
+.feed-item:nth-child(3){animation-delay:.14s}.feed-item:nth-child(4){animation-delay:.2s}
+.feed-item.newest .tag2{animation:tagPulse 2.2s ease-in-out infinite}
+@keyframes tagPulse{0%,100%{box-shadow:0 0 0 0 rgba(46,189,133,.0)}50%{box-shadow:0 0 14px 2px rgba(46,189,133,.45)}}
+.feed-item.down.newest .tag2{animation-name:tagPulseR}
+@keyframes tagPulseR{0%,100%{box-shadow:0 0 0 0 rgba(246,70,93,.0)}50%{box-shadow:0 0 14px 2px rgba(246,70,93,.45)}}
+@media (prefers-reduced-motion: reduce){
+  .rise,.feed-item{animation:none;opacity:1;transform:none}
+  .rv{opacity:1;transform:none;transition:none}
+  .tape-track{animation:none}
+  .feed-item.newest .tag2{animation:none}
+}
+
 /* ---------- feed ---------- */
 #feed{border-bottom:1px solid var(--line);padding:56px 0}
 .feed-box{margin-top:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;max-width:720px}
@@ -356,18 +399,27 @@ footer a{color:var(--muted)}
   </div>
 </nav>
 
+<!-- ================= TICKER ================= -->
+<div class="tape" aria-hidden="true"><div class="tape-track" id="tape-track"></div></div>
+
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="eyebrow"><span class="g">Free</span> crypto trading education · <span class="r">No paid course</span></div>
-    <h1>Live trade<br><span class="g">alerts.</span></h1>
-    <p class="lede">My bot scans ~900 MEXC futures pairs around the clock and fires when a real setup forms — a volume spike backed by breakout, funding and open-interest confluence, scored before it's sent. Long and short, streamed free to Telegram and live below.</p>
-    <p class="open-line"><b>100% free.</b> No paid signal group, no course to buy — just the data and the education.</p>
-    <div class="cta-row" id="join">
+    <div class="eyebrow rise d1"><span class="g">Free</span> crypto trading education · <span class="r">No paid course</span></div>
+    <h1 class="rise d2">Live trade<br><span class="g">alerts.</span></h1>
+    <p class="lede rise d3">My bot scans ~900 MEXC futures pairs around the clock and fires when a real setup forms — a volume spike backed by breakout, funding and open-interest confluence, scored before it's sent. Long and short, streamed free to Telegram and live below.</p>
+    <p class="open-line rise d3"><b>100% free.</b> No paid signal group, no course to buy — just the data and the education.</p>
+    <div class="cta-row rise d4" id="join">
       <a class="hero-tg" href="https://t.me/jwsalerts" target="_blank" rel="noopener">Join the alerts — free →</a>
       <a class="hero-feed" href="#feed">See live feed ↓</a>
     </div>
     
+    <div class="stats rise d5">
+      <div class="stat"><b data-count="900">0</b><span>pairs scanned</span></div>
+      <div class="stat"><b>24/7</b><span>bot uptime</span></div>
+      <div class="stat"><b data-count="4" data-suffix="-point">0</b><span>confluence score</span></div>
+      <div class="stat"><b>$0</b><span>forever free</span></div>
+    </div>
     <div class="byline">
       <img src="assets/shannon.png" alt="Shannon">
       <p><b>Put together by Shannon</b> — sharing what I'm learning, not selling a course. If it helps you, use my codes below.</p>
@@ -884,6 +936,49 @@ const KLAVIYO_LIST_ID = "SZqZXF"; // Email List (Shopify-synced master list)
   });
 })();
 
+/* ============ Ticker tape (feed-driven, value-prop fallback) ============ */
+function fillTape(alerts){
+  const t = document.getElementById("tape-track");
+  let items;
+  if (alerts && alerts.length){
+    items = alerts.slice(0,10).map(a=>{
+      const bear = /short|down|dump|bear/i.test(a.type||"");
+      return `<span><b class="${bear?"td":"tu"}">${bear?"▼":"▲"} ${(a.pair||"").replace("/USDT","")}</b> ${a.msg ? a.msg.split("·")[0].trim() : ""}</span>`;
+    });
+  } else {
+    items = ["<span><b class='tu'>▲ LONG</b> &amp; <b class='td'>▼ SHORT</b> setups</span>",
+             "<span>Confluence-scored <b>0–4</b> by code</span>",
+             "<span><b class='tu'>FREE FOREVER</b> — no signal-group fees</span>",
+             "<span>Join <b>t.me/jwsalerts</b></span>",
+             "<span>Bot running <b>24/7</b></span>"];
+  }
+  const row = items.join("");
+  t.innerHTML = row + row; // duplicated for the seamless loop
+}
+fillTape(null);
+
+/* ============ Stat count-up ============ */
+document.querySelectorAll(".stat b[data-count]").forEach(el=>{
+  const target = parseInt(el.dataset.count,10), suf = el.dataset.suffix||"";
+  const t0 = performance.now(), dur = 1200;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches){ el.textContent = (target>=100?"~":"")+target+suf; return; }
+  (function tick(now){
+    const p = Math.min((now-t0)/dur,1), v = Math.round(target*(1-Math.pow(1-p,3)));
+    el.textContent = (target>=100?"~":"")+v+suf;
+    if (p<1) requestAnimationFrame(tick);
+  })(t0);
+});
+
+/* ============ Scroll reveal ============ */
+(function(){
+  const els = document.querySelectorAll("section .wrap > *, .path .wrap > *");
+  els.forEach(e=>e.classList.add("rv"));
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target);} });
+  },{rootMargin:"0px 0px -8% 0px"});
+  els.forEach(e=>io.observe(e));
+})();
+
 /* ============ Live alerts feed ============ */
 const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main/alerts.json";
 (function(){
@@ -904,9 +999,10 @@ const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main
       const data = await res.json();
       const alerts = (data.alerts || []).slice(0, 8);
       if (!alerts.length) throw 0;
-      box.innerHTML = alerts.map(a => {
+      fillTape(alerts);
+      box.innerHTML = alerts.map((a, i) => {
         const bear = /short|down|dump|bear/i.test(a.type || "");
-        return `<div class="feed-item${bear ? " down" : ""}">
+        return `<div class="feed-item${bear ? " down" : ""}${i === 0 ? " newest" : ""}">
           <span class="tag2">${esc(a.type || "ALERT")}</span>
           <span class="fi-body"><span class="pair2">${esc(a.pair || "")}</span>
           <span class="msg2" style="display:block">${esc(a.msg || "")}</span></span>
