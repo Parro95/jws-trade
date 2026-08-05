@@ -254,6 +254,12 @@ html[data-theme="light"] .st.target{color:#fff}
 .fi-track em{font-style:normal;color:var(--faint);font-size:10px}
 .scoreb{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px;font-family:var(--mono);font-size:11px;color:var(--muted)}
 .scoreb b{color:var(--text)}
+.upd{margin-left:auto;color:var(--faint)}
+@keyframes rowFlashG{0%{background:color-mix(in srgb,var(--up) 14%,transparent)}100%{background:transparent}}
+@keyframes rowFlashR{0%{background:color-mix(in srgb,var(--down) 14%,transparent)}100%{background:transparent}}
+.feed-item.flash-g{animation:rowFlashG 1.1s ease-out}
+.feed-item.flash-r{animation:rowFlashR 1.1s ease-out}
+@media (prefers-reduced-motion: reduce){.feed-item.flash-g,.feed-item.flash-r{animation:none}}
 .scoreb .sg{color:var(--up)}.scoreb .sr{color:var(--down)}
 .feed-empty{padding:22px 18px;font-size:13.5px;color:var(--muted)}
 @media (prefers-reduced-motion: reduce){.feed-item{animation:none}}
@@ -1007,6 +1013,8 @@ const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main
     return Math.round(s/86400) + "d ago";
   }
   function esc(t){ const d=document.createElement("div"); d.textContent=t||""; return d.innerHTML; }
+  const prevChg = {};
+  let feedStamp = null;
   async function load(){
     try {
       const res = await fetch(FEED_URL + "?t=" + Date.now());
@@ -1051,6 +1059,16 @@ const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main
           <span class="msg2">${esc(a.msg || "")}</span>${track}
         </div>`;
       }).join("");
+      // flash rows whose live % moved since last refresh
+      alerts.forEach((a, idx) => {
+        const key = (a.pair || "") + "|" + (a.t || "");
+        if (typeof a.chg === "number" && key in prevChg && prevChg[key] !== a.chg) {
+          const row = box.children[idx];
+          if (row) row.classList.add(a.chg >= prevChg[key] ? "flash-g" : "flash-r");
+        }
+        if (typeof a.chg === "number") prevChg[key] = a.chg;
+      });
+      if (data.updated) feedStamp = new Date(data.updated).getTime();
       const tracked = alerts.filter(a => a.st);
       const sb = document.getElementById("feed-score");
       if (sb && tracked.length) {
@@ -1059,15 +1077,24 @@ const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main
           <span class="sg">&#10003; ${n("TARGET")} hit target</span>
           <span class="sr">&#10007; ${n("STOPPED")} stopped</span>
           <span>&#9679; ${n("LIVE")} live</span>
-          <span>&#8212; ${n("CLOSED")} closed</span>`;
+          <span>&#8212; ${n("CLOSED")} closed</span>
+          <span class="upd" id="feed-upd"></span>`;
         sb.hidden = false;
       }
+      stampTick();
     } catch(e) {
       box.innerHTML = '<p class="feed-empty">Feed warming up — the freshest alerts are always live on <a href="https://t.me/jwsalerts" target="_blank" rel="noopener">Telegram</a>.</p>';
     }
   }
+  function stampTick(){
+    const el = document.getElementById("feed-upd");
+    if (!el || !feedStamp) return;
+    const s = Math.max(0, Math.round((Date.now() - feedStamp) / 1000));
+    el.textContent = "updated " + (s < 90 ? s + "s" : Math.round(s / 60) + "m") + " ago";
+  }
   load();
   setInterval(load, 60000);
+  setInterval(stampTick, 10000);
 })();
 
 document.getElementById("yr").textContent = new Date().getFullYear();
