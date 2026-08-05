@@ -238,6 +238,23 @@ html[data-theme="light"] .hero-tg{color:#fff}
 .feed-item.down .mini{background:var(--down-dim);color:var(--down)}
 .feed-item .time2{margin-left:auto;flex-shrink:0;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
 .feed-item .msg2{display:block;font-size:12.5px;color:var(--muted);margin-top:5px;padding-left:22px}
+.fi-track{display:flex;flex-wrap:wrap;align-items:center;gap:6px 9px;margin-top:6px;padding-left:22px;font-family:var(--mono);font-size:10.5px}
+.pxs{color:var(--text);font-weight:600}
+.pxs i{font-style:normal;color:var(--faint);padding:0 3px}
+.pxs em{font-style:normal;color:var(--faint);font-weight:400;font-size:9.5px;letter-spacing:.08em}
+.st{font-size:8.5px;font-weight:700;letter-spacing:.1em;padding:3px 7px;border-radius:5px}
+.st.live{color:var(--up);border:1px solid var(--up);background:transparent}
+.feed-item.down .st.live{color:var(--down);border-color:var(--down)}
+.st.target{background:var(--up);color:#04140D}
+html[data-theme="light"] .st.target{color:#fff}
+.st.stopped{background:var(--down-dim);color:var(--down)}
+.st.closed{background:var(--panel);border:1px solid var(--line);color:var(--muted)}
+.chg{font-weight:700}
+.chg.pos{color:var(--up)}.chg.neg{color:var(--down)}
+.fi-track em{font-style:normal;color:var(--faint);font-size:10px}
+.scoreb{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.scoreb b{color:var(--text)}
+.scoreb .sg{color:var(--up)}.scoreb .sr{color:var(--down)}
 .feed-empty{padding:22px 18px;font-size:13.5px;color:var(--muted)}
 @media (prefers-reduced-motion: reduce){.feed-item{animation:none}}
 
@@ -440,11 +457,12 @@ footer a{color:var(--muted)}
     <div class="eyebrow"><span class="alert-live"><i></i>BOT RUNNING 24/7</span></div>
     <h2>Latest alerts</h2>
     <p class="sub">Straight from the bot — long &amp; short setups as they fire, each scored 0–4 on confluence. Full detail and instant pings on <a href="https://t.me/jwsalerts" target="_blank" rel="noopener">Telegram</a>.</p>
+    <div class="scoreb" id="feed-score" hidden></div>
     <div class="feed-box" id="feed-box"><p class="feed-empty">Loading the latest alerts…</p></div>
     <div class="alert-ctas" style="margin-top:18px">
       <a class="tg" href="https://t.me/jwsalerts" target="_blank" rel="noopener">Get alerts on Telegram →</a>
     </div>
-    <p class="alert-fine">Alerts are automated market-data signals — information, not trade recommendations. Anything you do with them is your decision; learn the risk rules below first.</p>
+    <p class="alert-fine">Alerts are automated market-data signals — information, not trade recommendations. Outcome tracking shows raw price change from alert time to now (target = 2x the stop distance) — hypothetical tracking, not trading results. Learn the risk rules below first.</p>
   </div>
 </section>
 
@@ -997,10 +1015,32 @@ const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main
       const alerts = (data.alerts || []).slice(0, 8);
       if (!alerts.length) throw 0;
       fillTape(alerts);
+      function fmtP(x){
+        if (typeof x !== "number" || !isFinite(x)) return "";
+        if (x >= 1000) return x.toLocaleString(undefined,{maximumFractionDigits:1});
+        if (x >= 1) return x.toLocaleString(undefined,{maximumFractionDigits:4});
+        return parseFloat(x.toPrecision(4)).toString();
+      }
+      const stmeta = {LIVE:["live","&#9679; LIVE"], TARGET:["target","&#10003; TARGET HIT"],
+                      STOPPED:["stopped","&#10007; STOPPED"], CLOSED:["closed","&#8212; CLOSED 24H"]};
       box.innerHTML = alerts.map((a, i) => {
         const t = a.type || "";
         const bear = /short|down|dump|bear/i.test(t);
         const chip = /strong/i.test(t) ? "STRONG" : (/daily/i.test(t) ? "DAILY" : "");
+        let track = "";
+        if (a.st && stmeta[a.st]) {
+          const [cls, label] = stmeta[a.st];
+          const chg = typeof a.chg === "number" ? a.chg : 0;
+          let px = "";
+          if (typeof a.entry === "number") {
+            let cur = (typeof a.cur === "number") ? a.cur
+              : a.entry * (1 + (a.side === "SHORT" ? -1 : 1) * chg / 100);
+            px = `<span class="pxs"><em>ENTRY</em> ${fmtP(a.entry)} <i>&#8594;</i> <em>NOW</em> ${fmtP(cur)}</span>`;
+          }
+          track = `<span class="fi-track"><span class="st ${cls}">${label}</span>
+            ${px}
+            <span class="chg ${chg >= 0 ? "pos" : "neg"}">${chg >= 0 ? "+" : ""}${chg.toFixed(2)}%</span></span>`;
+        }
         return `<div class="feed-item${bear ? " down" : ""}${i === 0 ? " newest" : ""}">
           <span class="fi-top">
             <span class="dir">${bear ? "&#9660;" : "&#9650;"}</span>
@@ -1008,9 +1048,20 @@ const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main
             ${chip ? `<span class="mini">${chip}</span>` : ""}
             <span class="time2">${rel(a.t)}</span>
           </span>
-          <span class="msg2">${esc(a.msg || "")}</span>
+          <span class="msg2">${esc(a.msg || "")}</span>${track}
         </div>`;
       }).join("");
+      const tracked = alerts.filter(a => a.st);
+      const sb = document.getElementById("feed-score");
+      if (sb && tracked.length) {
+        const n = s => tracked.filter(a => a.st === s).length;
+        sb.innerHTML = `<span>Last <b>${tracked.length}</b> tracked</span>
+          <span class="sg">&#10003; ${n("TARGET")} hit target</span>
+          <span class="sr">&#10007; ${n("STOPPED")} stopped</span>
+          <span>&#9679; ${n("LIVE")} live</span>
+          <span>&#8212; ${n("CLOSED")} closed</span>`;
+        sb.hidden = false;
+      }
     } catch(e) {
       box.innerHTML = '<p class="feed-empty">Feed warming up — the freshest alerts are always live on <a href="https://t.me/jwsalerts" target="_blank" rel="noopener">Telegram</a>.</p>';
     }
