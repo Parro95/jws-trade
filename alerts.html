@@ -134,7 +134,7 @@ const FEED_URL = "https://raw.githubusercontent.com/Parro95/jws-alerts-feed/main
       box.innerHTML = alerts.map(a => {
         const t = a.type || "";
         const bear = /short|down|dump|bear/i.test(t);
-        const chip = /strong/i.test(t) ? "STRONG" : (/daily/i.test(t) ? "DAILY" : "");
+        const chip = /strong/i.test(t) ? "STRONG" : (/daily/i.test(t) ? "DAILY" : (/runner/i.test(t) ? "RUNNER" : ""));
         let track = "";
         if (a.st && stmeta[a.st]) {
           const [cls, label] = stmeta[a.st];
